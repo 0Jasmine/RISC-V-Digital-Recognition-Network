@@ -42,7 +42,7 @@ main:
 #   void
 #================================================================
 print_int:
-    li a0 c_print_int
+    li a0 c_print_int # 1
     ecall
     ret
 
@@ -56,7 +56,7 @@ print_int:
 #   void
 #================================================================
 print_str:
-    li a0 c_print_str
+    li a0 c_print_str # 4
     ecall
     ret
 
@@ -70,7 +70,7 @@ print_str:
 #   a0 = Integer representation of string 
 #================================================================
 atoi:
-    li a0 c_atoi
+    li a0 c_atoi # 5
     ecall
     ret
 
@@ -84,7 +84,7 @@ atoi:
 #   a0 = Pointer to the start of the allocated memory
 #================================================================
 sbrk:
-    li a0 c_sbrk
+    li a0 c_sbrk # 9
     ecall
     ret
 
@@ -98,7 +98,7 @@ sbrk:
 #   No Return
 #================================================================
 exit:
-    li a0 c_exit
+    li a0 c_exit # 10
     ecall
 
 
@@ -106,12 +106,12 @@ exit:
 # void print_char(char a1)
 # Prints the ASCII character in a1 to the console.
 # args:
-#   a1 = character to print
+#   a1 = character to print 
 # return:
 #   void
 #================================================================
 print_char:
-    li a0 c_print_char
+    li a0 c_print_char # 11
     ecall
     ret
 
@@ -126,7 +126,7 @@ print_char:
 #   a0 = file descriptor
 #================================================================
 fopen:
-    li a0 c_openFile
+    li a0 c_openFile # 13
     ecall
     ret
 
@@ -142,7 +142,7 @@ fopen:
 #   a0 = Number of bytes actually read.
 #================================================================
 fread:
-    li a0 c_readFile
+    li a0 c_readFile # 14
     ecall
     ret
 
@@ -160,7 +160,7 @@ fread:
 #    it is either an error or EOF. You will also need to still flush the fd.
 #================================================================
 fwrite:
-    li a0 c_writeFile
+    li a0 c_writeFile # 15
     ecall
     ret
 
@@ -174,7 +174,7 @@ fwrite:
 #   a0 = 0 on success, and EOF (-1) otherwise.
 #================================================================
 fclose:
-    li a0 c_closeFile
+    li a0 c_closeFile # 16
     ecall
     ret
 
@@ -188,7 +188,7 @@ fclose:
 #   This program does not return.
 #================================================================
 exit2:
-    li a0 c_exit2
+    li a0 c_exit2 # 17
     ecall
     ret
 
@@ -202,7 +202,7 @@ exit2:
 #   a0 = 0 on success, and EOF (-1) otherwise.
 #================================================================
 fflush:
-    li a0 c_fflush
+    li a0 c_fflush # 18
     ecall
     ret
 
@@ -216,8 +216,8 @@ fflush:
 #   a0 = Nonzero falue if the end of file is reached. 0 Otherwise.
 #================================================================
 ferror:
-    li a0 c_ferror
-    ecall
+    li a0 c_ferror # 20
+    ecall 
     ret
 
 
@@ -230,7 +230,7 @@ ferror:
 #   void
 #================================================================
 print_hex:
-    li a0 c_printHex
+    li a0 c_printHex # 24
     ecall
     ret
 
@@ -299,7 +299,7 @@ print_num_alloc_blocks:
     ret
 
 #================================================================
-# void print_int_array(int* a0, int a1, int a2)
+# void (int* a0, int a1, int a2)
 # Prints an integer array, with spaces between the elements
 # args:
 #   a0 is the pointer to the start of the array

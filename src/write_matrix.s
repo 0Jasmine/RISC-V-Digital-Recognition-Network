@@ -1,4 +1,7 @@
 .globl write_matrix
+.data
+row: .word 0
+column: .word 0
 
 .text
 # ==============================================================================
@@ -27,16 +30,64 @@
 write_matrix:
 
     # Prologue
+    addi sp,sp,-12
+    sw ra,0(sp)
+    sw s0,4(sp)
+    sw s1,8(sp)
 
+    # copy
+    add s0,a1,x0
+    add t0,a2,x0
+    add t1,a3,x0
 
+    # open
+    add a1,x0,a0
+    addi a2,x0,1
+    jal ra,fopen
+    blt a0,x0,end
+    add s1,x0,a0
 
+    # store row
+    add a1,x0,s1
+    la t2,row
+    sw t0,0(t2)
+    add a2,x0,t2
+    addi a3,x0,1
+    addi a4,x0,4
+    jal ra,fwrite
+    blt a0,a3,end
 
+    # store column
+    add a1,x0,s1
+    la t2,column
+    sw t1,0(t2)
+    add a2,x0,t2
+    addi a3,x0,1
+    addi a4,x0,4
+    jal ra,fwrite
+    blt a0,a3,end
 
+    # store data
+    add a1,x0,s1  
+    add a2,s0,x0
+    mul a3,t0,t1
+    addi a4,x0,4
+    jal ra,fwrite
+    blt a0,a3,end
 
+    # flush
+    add a1,x0,s1
+    jal ra,fflush
+    blt a0,x0,end
 
-
-
+    # close
+    add a1,x0,s1
+    jal ra,fclose
+end:
     # Epilogue
-
+    lw ra,0(sp)
+    lw s0,4(sp)
+    lw s1,8(sp)
+    addi sp,sp,12
 
     ret
